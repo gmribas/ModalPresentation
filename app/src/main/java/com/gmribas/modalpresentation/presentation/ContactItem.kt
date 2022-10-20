@@ -73,5 +73,5 @@ fun PreviewContactItem() {
 @Preview
 @Composable
 fun PreviewContactItem2() {
-    ContactItem(contact = Mock.contact(), modifier = Modifier.background(Color.Red))
+    ContactItem(contact = Mock.contact(), modifier = Modifier.background(Color.Yellow))
 }
