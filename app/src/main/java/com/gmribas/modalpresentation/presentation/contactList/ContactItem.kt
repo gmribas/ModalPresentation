@@ -1,4 +1,4 @@
-package com.gmribas.modalpresentation.presentation
+package com.gmribas.modalpresentation.presentation.contactList
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

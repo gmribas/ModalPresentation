@@ -6,12 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.gmribas.modalpresentation.data.Mock
-import com.gmribas.modalpresentation.presentation.ContactListScreen
+import com.gmribas.modalpresentation.presentation.navigation.NavGraph
 import com.gmribas.modalpresentation.ui.theme.ModalPresentationTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,22 +20,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ContactListScreen(contacts = Mock.contactList(max = 50))
+                    NavGraph()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ModalPresentationTheme {
-        Greeting("Android")
     }
 }

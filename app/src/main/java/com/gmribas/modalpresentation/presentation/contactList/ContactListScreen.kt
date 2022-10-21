@@ -1,4 +1,4 @@
-package com.gmribas.modalpresentation.presentation
+package com.gmribas.modalpresentation.presentation.contactList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,12 +11,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.gmribas.modalpresentation.R
 import com.gmribas.modalpresentation.data.ContactDTO
 import com.gmribas.modalpresentation.data.Mock
+import com.gmribas.modalpresentation.presentation.navigation.Screens
 
 @Composable
-fun ContactListScreen(contacts: List<ContactDTO>) {
+fun ContactListScreen(navController: NavHostController, contacts: List<ContactDTO>) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -34,7 +37,7 @@ fun ContactListScreen(contacts: List<ContactDTO>) {
         LazyColumn {
             items(contacts.size) { index ->
                 ContactItem(contact = contacts[index]) { clickedContact ->
-
+                    navController.navigate(Screens.ContactDetails.route)
                 }
 
                 if (index < contacts.size) {
@@ -52,5 +55,5 @@ fun ContactListScreen(contacts: List<ContactDTO>) {
 @Preview
 @Composable
 fun PreviewContactListScreen() {
-    ContactListScreen(contacts = Mock.contactList(max = 10))
+    ContactListScreen(navController = rememberNavController(), contacts = Mock.contactList(max = 10))
 }
