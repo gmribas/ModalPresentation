@@ -15,10 +15,10 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
     startDestination = Screens.ContactList.route)
     {
         composable(Screens.ContactList.route) { 
-            ContactListScreen(contacts = )
+            ContactListScreen(navController)
         }
-        composable(Screens.ContactDetails.route) {
-            ContactDetailsScreen(contact = )
-        }
+//        composable(Screens.ContactDetails.route) {
+//            ContactDetailsScreen(contact = )
+//        }
     }
 }

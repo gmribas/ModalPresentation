@@ -1,7 +1,8 @@
 package com.gmribas.modalpresentation.presentation.contactList
 
-import com.gmribas.modalpresentation.data.ContactDTO
+import com.gmribas.modalpresentation.domain.Contact
 
 data class ContactListState(
-    val contactList: List<ContactDTO> = emptyList()
+    val contactList: List<Contact> = emptyList(),
+    val loading: Boolean = false
 )
