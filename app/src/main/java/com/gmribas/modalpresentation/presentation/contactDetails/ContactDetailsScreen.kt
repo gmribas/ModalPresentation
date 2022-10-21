@@ -1,11 +1,16 @@
-package com.gmribas.modalpresentation.presentation
+package com.gmribas.modalpresentation.presentation.contactDetails
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -73,12 +78,37 @@ fun ContactDetailsScreen(contact: ContactDTO) {
                     maxLines = 1
                 )
 
-                Row(Modifier.fillMaxSize(), horizontalArrangement = Alignment.Start) {
-                    Image(
-                        painter = rememberAsyncImagePainter(contact.picture),
-                        contentDescription = contact.name,
-                        modifier = Modifier.size(128.dp)
+                //computes  only once during composition and returns it during recomposition
+                val detailItems = remember {
+                    listOf(
+                        ContactDetailsItemDTO(
+                            text = contact.phoneNumber,
+                            image = Icons.Rounded.Phone
+                        ),
+                        ContactDetailsItemDTO(
+                            text = contact.email,
+                            image = Icons.Rounded.Email
+                        ),
+                        ContactDetailsItemDTO(
+                            text = contact.address,
+                            image = Icons.Rounded.Home
+                        )
                     )
+                }
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .width(4.dp))
+                Card {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 32.dp)
+                    ) {
+                        items(detailItems.size) { index ->
+                            val item = detailItems[index]
+                            ContactDetailsItem(text = item.text, image = item.image, description = item.description)
+                        }
+                    }
                 }
             }
         }
@@ -88,5 +118,5 @@ fun ContactDetailsScreen(contact: ContactDTO) {
 @Preview
 @Composable
 fun PreviewContactDetailsScreen() {
-    ContactDetailsScreen(contact = Mock.contactList(max = 1).first())
+    ContactDetailsScreen(contact = Mock.contact(id = 11))
 }

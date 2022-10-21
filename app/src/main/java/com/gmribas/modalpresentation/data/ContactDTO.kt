@@ -4,5 +4,7 @@ data class ContactDTO(
     val name: String,
     val nickname: String,
     val picture: String,
-    val phoneNumber: String
+    val phoneNumber: String,
+    val email: String,
+    val address: String
 )

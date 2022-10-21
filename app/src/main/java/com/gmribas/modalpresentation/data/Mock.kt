@@ -8,15 +8,24 @@ object Mock {
         name = "Contact Name $id",
         nickname = "nick $id",
         picture = pictureList[getRandomNumber()],
-        phoneNumber = getPhoneNumber()
+        phoneNumber = getPhoneNumber(),
+        email = "contact$id@gmail.com",
+        address = getAddress()
     )
 
     fun contactList(max: Int = 4) = (0..max).map { contact(it) }
 
+    private fun getAddress(): String {
+        val sb = StringBuilder()
+        sb.append(getRandomNumber()).append(getRandomNumber(min = 1)).append(", ")
+            .append("Street Name")
+        return sb.toString()
+    }
+
     private fun getPhoneNumber(): String {
         val sb = StringBuilder()
         sb
-            .append("(").append(getRandomNumber()).append(getRandomNumber()).append(")")
+            .append("(").append(getRandomNumber()).append(getRandomNumber()).append(") ")
             .append("9").append(getRandomNumber()).append(getRandomNumber()).append(getRandomNumber()).append(getRandomNumber())
             .append("-")
             .append(getRandomNumber()).append(getRandomNumber()).append(getRandomNumber()).append(getRandomNumber())
