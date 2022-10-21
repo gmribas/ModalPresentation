@@ -12,11 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gmribas.modalpresentation.R
-import com.gmribas.modalpresentation.data.ContactDTO
+import com.gmribas.modalpresentation.domain.Contact
 import com.gmribas.modalpresentation.data.Mock
 
 @Composable
-fun ContactListScreen(contacts: List<ContactDTO>) {
+fun ContactListScreen(contacts: List<Contact>) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

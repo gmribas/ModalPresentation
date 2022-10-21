@@ -16,11 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.gmribas.modalpresentation.data.ContactDTO
+import com.gmribas.modalpresentation.domain.Contact
 import com.gmribas.modalpresentation.data.Mock
 
 @Composable
-fun ContactItem(contact: ContactDTO, modifier: Modifier = Modifier, onClick: (ContactDTO) -> Unit) {
+fun ContactItem(contact: Contact, modifier: Modifier = Modifier, onClick: (Contact) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
