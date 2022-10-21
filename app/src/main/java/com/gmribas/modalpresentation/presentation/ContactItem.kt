@@ -2,6 +2,7 @@ package com.gmribas.modalpresentation.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,7 +20,7 @@ import com.gmribas.modalpresentation.data.ContactDTO
 import com.gmribas.modalpresentation.data.Mock
 
 @Composable
-fun ContactItem(contact: ContactDTO, modifier: Modifier = Modifier) {
+fun ContactItem(contact: ContactDTO, modifier: Modifier = Modifier, onClick: (ContactDTO) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +29,9 @@ fun ContactItem(contact: ContactDTO, modifier: Modifier = Modifier) {
             .then(modifier)
     ) {
         Row(
-            modifier = Modifier.height(128.dp),
+            modifier = Modifier
+                .height(128.dp)
+                .clickable { onClick(contact) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.padding(8.dp)) {
@@ -67,11 +70,11 @@ fun ContactItem(contact: ContactDTO, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PreviewContactItem() {
-    ContactItem(contact = Mock.contact())
+    ContactItem(contact = Mock.contact()) {}
 }
 
 @Preview
 @Composable
 fun PreviewContactItem2() {
-    ContactItem(contact = Mock.contact(), modifier = Modifier.background(Color.Yellow))
+    ContactItem(contact = Mock.contact(), modifier = Modifier.background(Color.Yellow)) {}
 }

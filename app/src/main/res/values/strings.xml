@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ModalPresentation</string>
+    <string name="contact_list_screen_name">Lista de contatos</string>
+    <string name="contact_details_screen_name">Detalhes do contato</string>
 </resources>
