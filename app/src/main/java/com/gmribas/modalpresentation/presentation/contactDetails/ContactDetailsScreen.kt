@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.gmribas.modalpresentation.R
-import com.gmribas.modalpresentation.data.ContactDTO
+import com.gmribas.modalpresentation.domain.Contact
 import com.gmribas.modalpresentation.data.Mock
 
 @Composable
-fun ContactDetailsScreen(contact: ContactDTO) {
+fun ContactDetailsScreen(contact: Contact) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

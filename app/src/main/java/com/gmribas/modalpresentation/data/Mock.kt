@@ -1,10 +1,11 @@
 package com.gmribas.modalpresentation.data
 
+import com.gmribas.modalpresentation.domain.Contact
 import java.util.*
 
 object Mock {
 
-    fun contact(id: Int = 0) = ContactDTO(
+    fun contact(id: Int = 0) = Contact(
         name = "Contact Name $id",
         nickname = "nick $id",
         picture = pictureList[getRandomNumber()],

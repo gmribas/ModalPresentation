@@ -1,6 +1,6 @@
-package com.gmribas.modalpresentation.data
+package com.gmribas.modalpresentation.domain
 
-data class ContactDTO(
+data class Contact(
     val name: String,
     val nickname: String,
     val picture: String,

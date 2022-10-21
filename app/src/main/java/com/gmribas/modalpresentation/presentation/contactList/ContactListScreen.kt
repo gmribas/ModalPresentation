@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.gmribas.modalpresentation.R
-import com.gmribas.modalpresentation.data.ContactDTO
+import com.gmribas.modalpresentation.domain.Contact
 import com.gmribas.modalpresentation.data.Mock
 import com.gmribas.modalpresentation.presentation.navigation.Screens
 
 @Composable
-fun ContactListScreen(navController: NavHostController, contacts: List<ContactDTO>) {
+fun ContactListScreen(navController: NavHostController, contacts: List<Contact>) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
