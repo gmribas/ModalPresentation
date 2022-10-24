@@ -28,7 +28,7 @@ fun ContactListScreen(navController: NavHostController, viewModel: ContactListVi
                 title = {
                     Text(
                         text = stringResource(R.string.contact_list_screen_name),
-                        color = MaterialTheme.colors.onBackground
+                        color = MaterialTheme.colors.onPrimary
                     )
                 },
                 backgroundColor = MaterialTheme.colors.primaryVariant
@@ -50,7 +50,7 @@ fun ContactListScreen(navController: NavHostController, viewModel: ContactListVi
         LazyColumn {
             items(state.contactList.size) { index ->
                 ContactItem(contact = state.contactList[index]) { clickedContact ->
-                    navController.navigate(Screens.ContactDetails.route)
+                    navController.navigate(Screens.ContactDetails.route + "/${clickedContact.id}")
                 }
 
                 if (index < state.contactList.size) {

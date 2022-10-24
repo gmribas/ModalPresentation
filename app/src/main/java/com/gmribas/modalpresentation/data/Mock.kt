@@ -6,6 +6,7 @@ import java.util.*
 object Mock {
 
     fun contact(id: Int = 0) = Contact(
+        id = id,
         name = "Contact Name $id",
         nickname = "nick $id",
         picture = pictureList[getRandomNumber()],

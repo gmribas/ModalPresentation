@@ -19,13 +19,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.gmribas.modalpresentation.R
 import com.gmribas.modalpresentation.domain.Contact
 import com.gmribas.modalpresentation.data.Mock
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun ContactDetailsScreen(contact: Contact) {
+fun ContactDetailsScreen(navController: NavController, viewModel: ContactDetailsViewModel = getViewModel()) {
+    val state = viewModel.state.value
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -33,11 +38,12 @@ fun ContactDetailsScreen(contact: Contact) {
                 title = {
                     Text(
                         text = stringResource(R.string.contact_details_screen_name),
-                        color = MaterialTheme.colors.onBackground
+                        color = MaterialTheme.colors.onPrimary
                     )
                 },
+                backgroundColor = MaterialTheme.colors.primaryVariant,
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Back"
@@ -48,65 +54,75 @@ fun ContactDetailsScreen(contact: Contact) {
         }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 36.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Image(
-                    painter = rememberAsyncImagePainter(contact.picture),
-                    contentDescription = contact.name,
-                    modifier = Modifier.size(128.dp)
-                )
-                Spacer(modifier = Modifier.padding(bottom = 24.dp))
-                Text(
-                    text = contact.name,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 24.sp,
-                    color = MaterialTheme.colors.onBackground,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-                Spacer(modifier = Modifier)
-                Text(
-                    text = contact.nickname,
-                    fontWeight = FontWeight.Light,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colors.onBackground,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-
-                //computes  only once during composition and returns it during recomposition
-                val detailItems = remember {
-                    listOf(
-                        ContactDetailsItemDTO(
-                            text = contact.phoneNumber,
-                            image = Icons.Rounded.Phone
-                        ),
-                        ContactDetailsItemDTO(
-                            text = contact.email,
-                            image = Icons.Rounded.Email
-                        ),
-                        ContactDetailsItemDTO(
-                            text = contact.address,
-                            image = Icons.Rounded.Home
-                        )
-                    )
-                }
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .width(4.dp))
-                Card {
-                    LazyColumn(
+            if (state.error == null) {
+                state.contact?.let { contact ->
+                    Column(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = 32.dp)
+                            .align(Alignment.TopCenter)
+                            .padding(top = 36.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        items(detailItems.size) { index ->
-                            val item = detailItems[index]
-                            ContactDetailsItem(text = item.text, image = item.image, description = item.description)
+                        Image(
+                            painter = rememberAsyncImagePainter(state.contact.picture),
+                            contentDescription = contact.name,
+                            modifier = Modifier.size(128.dp)
+                        )
+                        Spacer(modifier = Modifier.padding(bottom = 24.dp))
+                        Text(
+                            text = contact.name,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 24.sp,
+                            color = MaterialTheme.colors.onBackground,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1
+                        )
+                        Spacer(modifier = Modifier)
+                        Text(
+                            text = contact.nickname,
+                            fontWeight = FontWeight.Light,
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colors.onBackground,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1
+                        )
+
+                        //computes  only once during composition and returns it during recomposition
+                        val detailItems = remember {
+                            listOf(
+                                ContactDetailsItemDTO(
+                                    text = contact.phoneNumber,
+                                    image = Icons.Rounded.Phone
+                                ),
+                                ContactDetailsItemDTO(
+                                    text = contact.email,
+                                    image = Icons.Rounded.Email
+                                ),
+                                ContactDetailsItemDTO(
+                                    text = contact.address,
+                                    image = Icons.Rounded.Home
+                                )
+                            )
+                        }
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .width(4.dp)
+                        )
+                        Card {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(top = 32.dp)
+                            ) {
+                                items(detailItems.size) { index ->
+                                    val item = detailItems[index]
+                                    ContactDetailsItem(
+                                        text = item.text,
+                                        image = item.image,
+                                        description = item.description
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -118,5 +134,5 @@ fun ContactDetailsScreen(contact: Contact) {
 @Preview
 @Composable
 fun PreviewContactDetailsScreen() {
-    ContactDetailsScreen(contact = Mock.contact(id = 11))
+    ContactDetailsScreen(rememberNavController())
 }
