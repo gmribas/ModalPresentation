@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ModalPresentation</string>
     <string name="contact_list_screen_name">Lista de contatos</string>
+    <string name="contact_list_screen_rationale_permission_title">Sem essa permissão não é possível usar o app</string>
+    <string name="contact_list_screen_first_time_permission_title">Permissão necessária para o uso do app</string>
+    <string name="contact_list_screen_permission_granted_title">Permissão OK</string>
+    <string name="ok">OK</string>
     <string name="contact_details_screen_name">Detalhes do contato</string>
     <string name="contact_details_screen_details">Telefone</string>
 </resources>

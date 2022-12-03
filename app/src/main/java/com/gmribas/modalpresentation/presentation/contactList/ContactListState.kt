@@ -4,5 +4,6 @@ import com.gmribas.modalpresentation.domain.Contact
 
 data class ContactListState(
     val contactList: List<Contact> = emptyList(),
-    val loading: Boolean = false
+    val loading: Boolean = false,
+    val showDialogPermission: Boolean = false
 )

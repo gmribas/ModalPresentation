@@ -42,4 +42,12 @@ class ContactListViewModel(private val repository: ContactRepository) : ViewMode
                 }
         }
     }
+
+    fun askForPermissionIfNeeded() {
+        _state.value = _state.value.copy(showDialogPermission = true)
+    }
+
+    fun dismissPermission() {
+        _state.value = _state.value.copy(showDialogPermission = false)
+    }
 }
